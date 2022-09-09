@@ -30,8 +30,8 @@ public class FileHandler {
                 Users.addUser(newUser); // Lägger in dem i Users HashMap
             }
 
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Textfilen kommer att läggas till automagiskt");
         }
     }
 }
