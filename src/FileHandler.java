@@ -31,7 +31,7 @@ public class FileHandler {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("Textfilen kommer att läggas till automagiskt");
+            System.out.println("Lägg till en ny användare");
         }
     }
 }

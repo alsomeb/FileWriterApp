@@ -14,7 +14,7 @@ public class Users {
 
     public static void printAllUsers() {
         if(users.isEmpty()) {
-            System.out.println("Inga kontakter ännu, lägg till!");
+            System.out.println("Inga kontakter ännu");
             return; // avbryter metoden
         }
         users.forEach( (name,email) -> System.out.println(name + " " + email) );
