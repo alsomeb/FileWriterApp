@@ -70,7 +70,7 @@ public class Main {
             return false;
         }
 
-        int lastIndexOfDot = email.indexOf(".");
+        int lastIndexOfDot = email.lastIndexOf(".");
         boolean hasAlpha = email.contains("@");
         String lastBit = email.substring(lastIndexOfDot);
 
