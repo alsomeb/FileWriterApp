@@ -100,7 +100,7 @@ public class Main {
     public static void update(Scanner scan) {
         while (true) {
             if(Users.checkIfNoUsers()) {
-                break;
+                break; // Pga vi inte har users
             }
 
             Users.printAllUsers();
