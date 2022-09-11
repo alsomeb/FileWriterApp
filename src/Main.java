@@ -13,6 +13,8 @@ public class Main {
         // Om filen inte finns så catch --> finns ingen historik, spara ner nya kontakter ! - KLAR
         // Använd Scanner (lek 5 sida 22 i PP) - KLAR
 
+        // TODO - KUNNA DELETE SAMT UPDATE, FÅR VI EN HEL CRUD, UPDATE KLAR
+
         Scanner scan = new Scanner(System.in);
 
 
@@ -33,6 +35,8 @@ public class Main {
 
                 case "3" -> search(scan);
 
+                case "4" -> update(scan);
+
                 default -> System.out.println("Välj rätt");
 
             }
@@ -42,7 +46,7 @@ public class Main {
 
     // LITE METODER I MAIN
     public static void printMenu() {
-        System.out.println("1. Lägg Till\n2. Visa Alla\n3. Sök\n0. Avsluta");
+        System.out.println("1. Lägg Till\n2. Visa Alla\n3. Sök\n4. Uppdatera mail\n5. Ta bort\n0. Avsluta");
     }
 
     public static void getUserInfo(Scanner scan) { // Tar in scanner objektet, reUse
@@ -84,6 +88,27 @@ public class Main {
 
         String result = Users.searchByName(userName);
         System.out.println(result);
+    }
+
+    public static void update(Scanner scan) {
+        while (true) {
+            Users.printAllUsers();
+            System.out.print("\nDessa finns i registret, vem vill du uppdatera ?: ");
+            String userName = scan.next().trim().toLowerCase();
+
+            if (Users.isInRecord(userName)) {
+                System.out.print("Ange ny mail för " + userName + ": ");
+                String newEmail = scan.next().trim().toLowerCase();
+                System.out.println("Mail ändrad till: " + newEmail);
+
+                String oldEmail = Users.getEmailByUsername(userName);
+                Users.changeEmail(userName, newEmail);
+                FileHandler.saveUpdatedUserEmailToFile(oldEmail, newEmail);
+                break;
+            } else {
+                System.out.println("Finns ej i våra register, stavfel ?\n");
+            }
+        }
     }
 
 

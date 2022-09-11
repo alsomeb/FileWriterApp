@@ -29,4 +29,16 @@ public class Users {
 
         return "Fanns inte";
     }
+
+    public static boolean isInRecord(String name) {
+        return users.containsKey(name); // true eller false
+    }
+
+    public static void changeEmail(String userName, String newEmail) {
+        users.put(userName, newEmail);
+    }
+
+    public static String getEmailByUsername(String userName) {
+        return users.get(userName);
+    }
 }
