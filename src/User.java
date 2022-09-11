@@ -1,6 +1,6 @@
 public class User {
-    private final String userName;
-    private final String email;
+    private String userName;
+    private String email;
 
     public User(String userName, String email) {
         this.userName = userName;
@@ -13,5 +13,13 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

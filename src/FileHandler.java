@@ -68,6 +68,8 @@ public class FileHandler {
 
         } catch (FileNotFoundException e) {
             System.out.println("No record found, add contacts");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Just nu finns inga kontakter, lägg till!");
         }
     }
 }

@@ -13,13 +13,15 @@ public class Main {
         // Om filen inte finns så catch --> finns ingen historik, spara ner nya kontakter ! - KLAR
         // Använd Scanner (lek 5 sida 22 i PP) - KLAR
 
-        // TODO - KUNNA DELETE SAMT UPDATE, FÅR VI EN HEL CRUD, UPDATE KLAR
+        // TODO - KOLLA SÅ INTE DUBBLETTER PÅ NAMN FINNS, SAMT DELTE!
 
         Scanner scan = new Scanner(System.in);
 
 
         while (true) {
-            FileHandler.loadUsers(); // Laddar ner Users från contacts.txt
+            if (Users.checkIfNoUsers()) {
+                FileHandler.loadUsers(); // Laddar ner Users från contacts.txt
+            }
 
             System.out.println("\n");
             printMenu();
@@ -86,8 +88,13 @@ public class Main {
         System.out.print("\nSök username: ");
         String userName = scan.next().trim().toLowerCase();
 
-        String result = Users.searchByName(userName);
-        System.out.println(result);
+        try {
+            User foundUser = Users.searchByName(userName);
+            System.out.println("Resultat: " + foundUser.getUserName() + " har email " + foundUser.getEmail());
+        } catch (NullPointerException e) {
+            System.out.println("Fanns ej!");
+        }
+
     }
 
     public static void update(Scanner scan) {
@@ -101,12 +108,14 @@ public class Main {
             String userName = scan.next().trim().toLowerCase();
 
             if (Users.isInRecord(userName)) {
-                System.out.print("Ange ny mail för " + userName + ": ");
-                String newEmail = scan.next().trim().toLowerCase();
-                System.out.println("Mail ändrad till: " + newEmail);
+                User currentUser = Users.searchByName(userName);
+                String oldEmail = currentUser.getEmail();
 
-                String oldEmail = Users.getEmailByUsername(userName);
-                Users.changeEmail(userName, newEmail);
+                System.out.print("Ange ny mail för " + currentUser.getUserName() + ": ");
+                currentUser.setEmail(scan.next().trim().toLowerCase());
+                System.out.println("Mail ändrad till: " + currentUser.getEmail());
+
+                String newEmail = currentUser.getEmail();
                 FileHandler.saveUpdatedUserEmailToFile(oldEmail, newEmail);
                 break;
             } else {
@@ -118,7 +127,7 @@ public class Main {
 
     public static void createUser(String userName, String email) {
         User newUser = new User(userName, email); // Skapar objekt User
-        Users.addUser(newUser); // Lägger in newUser i Users Hashmap
+        Users.addUserToList(newUser); // Lägger in newUser i Listan
         FileHandler.saveUserToFile(newUser); // Sparar User objekt till fil
     }
 }

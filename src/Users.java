@@ -1,46 +1,46 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Users {
-    private static final HashMap<String, String> users = new HashMap<>(); // Kan va final pga man kan ändra i objektet med HashMap metoder men ej OVERWRITE till en ny hashMap
+    private static final ArrayList<User> usersList = new ArrayList<>(); // Lista med Users
 
 
 
     public static void addUser(User user) {
-        String userName = user.getUserName();
-        String email = user.getEmail();
-        users.put(userName,email);
+        usersList.add(user);
+    }
+
+    public static void addUserToList(User user) {
+        usersList.add(user);
     }
 
 
     public static void printAllUsers() {
-        if(users.isEmpty()) {
-            System.out.println("Inga kontakter ännu");
-            return; // avbryter metoden
+        if(usersList.isEmpty()) {
+            return; // avbryter metoden har en catch som skriver fel med i FileHandler
         }
-        users.forEach( (name,email) -> System.out.println(name + " " + email) );
+        usersList.forEach( (user) -> System.out.println(user.getUserName() + " " + user.getEmail()) );
     }
 
     public static boolean checkIfNoUsers() {
-        return users.isEmpty();
+        return usersList.isEmpty();
     }
 
-    public static String searchByName(String name) {
-        if(users.containsKey(name)) {
-            return users.get(name);
-        }
-
-        return "Fanns inte";
+    public static User searchByName(String name) {
+       for (User user : usersList) {
+           if (user.getUserName().equals(name)) {
+               return user;
+           }
+       }
+       throw new NullPointerException();
     }
+
 
     public static boolean isInRecord(String name) {
-        return users.containsKey(name); // true eller false
-    }
-
-    public static void changeEmail(String userName, String newEmail) {
-        users.put(userName, newEmail);
-    }
-
-    public static String getEmailByUsername(String userName) {
-        return users.get(userName);
+        for (User user : usersList) {
+            if(user.getUserName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
