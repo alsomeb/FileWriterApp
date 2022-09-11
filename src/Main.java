@@ -92,6 +92,10 @@ public class Main {
 
     public static void update(Scanner scan) {
         while (true) {
+            if(Users.checkIfNoUsers()) {
+                break;
+            }
+
             Users.printAllUsers();
             System.out.print("\nDessa finns i registret, vem vill du uppdatera ?: ");
             String userName = scan.next().trim().toLowerCase();

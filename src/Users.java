@@ -20,7 +20,9 @@ public class Users {
         users.forEach( (name,email) -> System.out.println(name + " " + email) );
     }
 
-
+    public static boolean checkIfNoUsers() {
+        return users.isEmpty();
+    }
 
     public static String searchByName(String name) {
         if(users.containsKey(name)) {
