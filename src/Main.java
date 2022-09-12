@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
@@ -91,7 +92,7 @@ public class Main {
         try {
             User foundUser = Users.searchByName(userName);
             System.out.println("Resultat: " + foundUser.getUserName() + " har email " + foundUser.getEmail());
-        } catch (NullPointerException e) {
+        } catch (NoSuchElementException e) {
             System.out.println("Fanns ej!");
         }
 

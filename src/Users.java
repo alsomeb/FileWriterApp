@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class Users {
     private static final ArrayList<User> usersList = new ArrayList<>(); // Lista med Users
@@ -31,7 +32,7 @@ public class Users {
                return user;
            }
        }
-       throw new NullPointerException();
+       throw new NoSuchElementException();
     }
 
 
