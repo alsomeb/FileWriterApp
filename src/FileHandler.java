@@ -63,7 +63,7 @@ public class FileHandler {
                 String email = currentLine[1];
 
                 User newUser = new User(userName, email); // Laddar in dem Users som fanns sedan innan i filen, skapar objekt av dem.
-                Users.addUser(newUser); // Lägger in dem i Users HashMap
+                Users.addUserToList(newUser); // Lägger in dem i Users arrayListan
             }
 
         } catch (FileNotFoundException e) {

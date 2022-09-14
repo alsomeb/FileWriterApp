@@ -5,11 +5,6 @@ public class Users {
     private static final ArrayList<User> usersList = new ArrayList<>(); // Lista med Users
 
 
-
-    public static void addUser(User user) {
-        usersList.add(user);
-    }
-
     public static void addUserToList(User user) {
         usersList.add(user);
     }
