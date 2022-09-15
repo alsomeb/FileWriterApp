@@ -14,7 +14,8 @@ public class Main {
         // Om filen inte finns så catch --> finns ingen historik, spara ner nya kontakter ! - KLAR
         // Använd Scanner (lek 5 sida 22 i PP) - KLAR
 
-        // TODO - KOLLA SÅ INTE DUBBLETTER PÅ NAMN FINNS, SAMT DELTE!
+        // TODO - KOLLA SÅ INTE DUBBLETTER PÅ NAMN (I USERS KLASSEN ELLER INPUT VALIDATOR?)
+        // TODO - SAMT DELETE!
 
         Scanner scan = new Scanner(System.in);
 
@@ -32,7 +33,7 @@ public class Main {
             switch (val) {
                 case "0" -> System.exit(0); // Avslutar Appen
 
-                case "1" -> getUserInfo(scan);
+                case "1" -> collectUserInfo(scan);
 
                 case "2" -> Users.printAllUsers();
 
@@ -52,42 +53,41 @@ public class Main {
         System.out.println("1. Lägg Till\n2. Visa Alla\n3. Sök\n4. Uppdatera mail\n5. Ta bort\n0. Avsluta");
     }
 
-    public static void getUserInfo(Scanner scan) { // Tar in scanner objektet, reUse
+    public static void collectUserInfo(Scanner scan) { // Tar in scanner objektet, reUse
+        String userName = getUserName(scan);
+        String email = getUserEmail(scan);
+        createUser(userName, email);
+        System.out.println("Added user: " + userName);
+    }
+
+    public static String getUserName(Scanner scan) {
         while (true) {
             System.out.print("\nAnge username: ");
-            String userName = scan.next().trim().toLowerCase(); // TODO Namnet måste va minst 2 bokstäver kanske?
-
-            scan.nextLine(); // radbrytning
-
-            System.out.print("\nAnge Email: ");
-            String email = scan.next().trim().toLowerCase();
-
-            if (!isEmail(email)) {
-                System.out.println("Innehåller ej .com / .se");
+            String userName = scan.next().trim().toLowerCase();
+            if (InputValidator.isValidUserName(userName)) {
+                return userName;
             } else {
-                System.out.println("User " + userName + " added!");
-                createUser(userName, email);
-                break;
+                System.out.println("Namnet måste minst va 2 tecken");
             }
         }
     }
 
-    public static boolean isEmail(String email) {
-        if (!email.contains(".")) {
-            return false;
+    public static String getUserEmail(Scanner scan) {
+        while (true) {
+            System.out.print("\nAnge Email: ");
+            String email = scan.next().trim().toLowerCase();
+            if(InputValidator.isEmail(email)) {
+                return email;
+            } else {
+                System.out.println("Ej giltig Email.");
+            }
         }
-
-        int lastIndexOfDot = email.lastIndexOf(".");
-        boolean hasAlpha = email.contains("@");
-        String lastBit = email.substring(lastIndexOfDot);
-
-        return hasAlpha && lastBit.equals(".com") || lastBit.equals(".se"); // Har @ och .COM ELLER .SE
     }
 
 
+
     public static void search(Scanner scan) {
-        System.out.print("\nSök username: ");
-        String userName = scan.next().trim().toLowerCase();
+        String userName = getUserName(scan); // Re-use
 
         try {
             User foundUser = Users.searchByName(userName);
