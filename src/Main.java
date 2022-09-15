@@ -15,7 +15,7 @@ public class Main {
         // Använd Scanner (lek 5 sida 22 i PP) - KLAR
 
         // TODO - KOLLA SÅ INTE DUBBLETTER PÅ NAMN (I USERS KLASSEN ELLER INPUT VALIDATOR?)
-        // TODO - SAMT DELETE!
+        // TODO - DELETE!
 
         Scanner scan = new Scanner(System.in);
 
