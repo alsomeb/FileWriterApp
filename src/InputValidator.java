@@ -2,7 +2,7 @@ public class InputValidator {
     // Syftet med denna klass är att validera inputs
 
     public static boolean isValidUserName(String name) {
-        if(name.length() >= 2) {
+        if (name.length() >= 2) {
             return true;
         }
         return false;

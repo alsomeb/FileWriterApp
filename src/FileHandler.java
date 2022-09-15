@@ -17,14 +17,13 @@ public class FileHandler {
     }
 
 
-    public static void saveUpdatedUserEmailToFile(String oldEmail, String newEmail){
+    public static void saveUpdatedUserEmailToFile(String oldEmail, String newEmail) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             StringBuilder oldContentOfFile = new StringBuilder();
             String line = reader.readLine();
 
             while (line != null) {
-
                 oldContentOfFile.append(line).append("--"); // måste ha ett tecken till som jag kan split på då det är space normalt i filen för writeNewContent() metod
                 line = reader.readLine(); // läs nästa
             }
@@ -42,7 +41,7 @@ public class FileHandler {
         try {
             PrintWriter ut = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
             String[] arr = content.split("--");
-            for(String line : arr) {
+            for (String line : arr) {
                 ut.println(line);
             }
             ut.close();
