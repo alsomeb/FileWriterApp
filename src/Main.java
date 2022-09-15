@@ -14,7 +14,7 @@ public class Main {
         // Använd Scanner (lek 5 sida 22 i PP) - KLAR
 
         // TODO - KOLLA SÅ INTE DUBBLETTER PÅ NAMN (I USERS KLASSEN)
-        // TODO - DELETE!
+        // TODO - DELETE!!
 
 
         FileHandler.loadUsers(); // Laddar ner Users från contacts.txt
