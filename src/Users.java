@@ -20,13 +20,6 @@ public class Users {
     }
 
 
-    public static boolean checkIfNameAlreadyExist(String name) {
-        return usersList.stream()
-                .anyMatch(person -> person.getUserName()
-                        .equalsIgnoreCase(name));
-    }
-
-
     public static User searchByNameReturnUserElseThrow(String name) {
         return usersList.stream()
                 .filter(user -> user.getUserName().equals(name))
@@ -52,7 +45,7 @@ public class Users {
         return false;
          */
         return usersList.stream()
-                .anyMatch(user -> user.getUserName().equals(name));
+                .anyMatch(user -> user.getUserName().equalsIgnoreCase(name));
     }
 
     public static void updateUserMenu(Scanner scan) {

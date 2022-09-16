@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class InputValidator {
     // Syftet med denna klass är att validera inputs
 
-    public static boolean isValidUserName(String name) {
+    public static boolean isNotValidUserName(String name) {
         return name.length() < 3;
     }
 
@@ -11,7 +11,7 @@ public class InputValidator {
         while (true) {
             System.out.print("\nAnge username: ");
             String userName = scan.next().trim().toLowerCase();
-            if (InputValidator.isValidUserName(userName)) {
+            if (InputValidator.isNotValidUserName(userName)) {
                 System.out.println("Namnet för kort (Minst 2 bokstäver)");
             } else {
                 return userName;
@@ -23,9 +23,9 @@ public class InputValidator {
         while (true) {
             System.out.print("\nAnge username: ");
             String userName = scan.next().trim().toLowerCase();
-            if (InputValidator.isValidUserName(userName)) {
+            if (InputValidator.isNotValidUserName(userName)) {
                 System.out.println("Namnet för kort (Minst 2 bokstäver)");
-            } else if (Users.checkIfNameAlreadyExist(userName)){
+            } else if (Users.isInRecord(userName)){
                 System.out.println("Namnet finns redan i databasen");
             } else {
                 return userName;
