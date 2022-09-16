@@ -13,7 +13,7 @@ public class Main {
         // Om filen inte finns så catch --> finns ingen historik, spara ner nya kontakter ! - KLAR
         // Använd Scanner (lek 5 sida 22 i PP) - KLAR
 
-        // TODO - KOLLA SÅ INTE DUBBLETTER PÅ NAMN (I USERS KLASSEN)
+        // KOLLA SÅ INTE DUBBLETTER PÅ NAMN (I USERS KLASSEN / INPUT VALIDATOR ) - KLAR
         // TODO - DELETE!!
 
 

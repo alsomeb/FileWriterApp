@@ -19,7 +19,15 @@ public class Users {
         return usersList.isEmpty();
     }
 
-    public static User searchByName(String name) {
+
+    public static boolean checkIfNameAlreadyExist(String name) {
+        return usersList.stream()
+                .anyMatch(person -> person.getUserName()
+                        .equalsIgnoreCase(name));
+    }
+
+
+    public static User searchByNameReturnUserElseThrow(String name) {
         return usersList.stream()
                 .filter(user -> user.getUserName().equals(name))
                 .findFirst()
@@ -96,14 +104,14 @@ public class Users {
         String userName = scan.next().trim().toLowerCase();
         User currentUser = null;
         if (Users.isInRecord(userName)) {
-            currentUser = Users.searchByName(userName);
+            currentUser = Users.searchByNameReturnUserElseThrow(userName);
         }
         return currentUser;
     }
 
 
     public static void collectUserInfo(Scanner scan) { // Tar in scanner objektet, reUse
-        String userName = getUserName(scan);
+        String userName = InputValidator.newUserInputValidator(scan);
         String email = getUserEmail(scan);
         createUser(userName, email);
         System.out.println("Added user: " + userName);
@@ -127,28 +135,16 @@ public class Users {
         }
     }
 
-    public static String getUserName(Scanner scan) {
-        while (true) {
-            System.out.print("\nAnge username: ");
-            String userName = scan.next().trim().toLowerCase();
-            if (InputValidator.isValidUserName(userName)) {
-                return userName;
-            } else {
-                System.out.println("Namnet måste minst va 2 tecken");
-            }
-        }
-    }
-
 
     public static void search(Scanner scan) {
         if (Users.checkIfNoUsers()) {
             System.out.println("Kan ej söka för finns inga users");
             return;
         }
-        String userName = getUserName(scan); // Re-use
+        String userName = InputValidator.searchByNameValidator(scan);
 
         try {
-            User foundUser = Users.searchByName(userName);
+            User foundUser = Users.searchByNameReturnUserElseThrow(userName);
             System.out.println("Resultat: " + foundUser.getUserName() + " har email " + foundUser.getEmail());
         } catch (NoSuchElementException e) {
             System.out.println("Fanns ej!");
