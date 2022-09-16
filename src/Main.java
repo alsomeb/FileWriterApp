@@ -17,7 +17,7 @@ public class Main {
         // TODO - DELETE!!
 
 
-        FileHandler.loadUsers(); // Laddar ner Users från contacts.txt
+        FileHandler.loadUsers(); // Laddar ner Users från contacts.txt // Skall va utanför loop så den inte laddar om och blir dubletter
         Scanner scan = new Scanner(System.in);
 
 

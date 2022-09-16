@@ -35,12 +35,16 @@ public class Users {
 
 
     public static boolean isInRecord(String name) {
+        /*
         for (User user : usersList) {
             if (user.getUserName().equals(name)) {
                 return true;
             }
         }
         return false;
+         */
+        return usersList.stream()
+                .anyMatch(user -> user.getUserName().equals(name));
     }
 
     public static void updateUserMenu(Scanner scan) {
