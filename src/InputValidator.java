@@ -12,7 +12,7 @@ public class InputValidator {
             System.out.print("\nAnge username: ");
             String userName = scan.next().trim().toLowerCase();
             if (InputValidator.isNotValidUserName(userName)) {
-                System.out.println("Namnet för kort (Minst 2 bokstäver)");
+                System.out.println("Namnet för kort (Minst 3 bokstäver)");
             } else {
                 return userName;
             }
@@ -24,7 +24,7 @@ public class InputValidator {
             System.out.print("\nAnge username: ");
             String userName = scan.next().trim().toLowerCase();
             if (InputValidator.isNotValidUserName(userName)) {
-                System.out.println("Namnet för kort (Minst 2 bokstäver)");
+                System.out.println("Namnet för kort (Minst 3 bokstäver)");
             } else if (Users.isInRecord(userName)){
                 System.out.println("Namnet finns redan i databasen");
             } else {
