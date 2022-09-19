@@ -12,11 +12,51 @@ public class Users {
 
 
     public static void printAllUsers() {
+        if (Users.checkIfNoUsers()) {
+            System.out.println("Finns inga just nu, lägg till");
+            return;
+        }
         usersList.forEach((user) -> System.out.println(user.getUserName() + " " + user.getEmail()));
     }
 
     public static boolean checkIfNoUsers() {
         return usersList.isEmpty();
+    }
+
+    public static void delete(Scanner scan) {
+        if (Users.checkIfNoUsers()) {
+            System.out.println("Kan ej ta bort någon för finns inga users");
+            return;
+        }
+        Users.printAllUsers();
+        handleDeletedUser(scan);
+
+    }
+
+    public static void handleDeletedUser(Scanner scan) {
+        User userToDelete = findUserToDelete(scan);
+        if (userToDelete == null) {
+            System.out.println("Användaren finns inte");
+            return;
+        }
+        System.out.println("\nUser " + userToDelete.getUserName() + " deleted!");
+        deleteFromList(userToDelete);
+        FileHandler.deleteUserFromFile(userToDelete);
+    }
+
+    public static void deleteFromList(User user) {
+        usersList.remove(user);
+    }
+
+
+    public static User findUserToDelete(Scanner scan) {
+        System.out.println("\nSkriv in användarnamn på användaren du vill ta bort");
+        String userName = scan.next().trim().toLowerCase();
+        User currentUser = null;
+        if (Users.isInRecord(userName)) {
+            currentUser = searchByNameReturnUserElseThrow(userName);
+        }
+        return currentUser;
     }
 
 

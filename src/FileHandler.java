@@ -16,6 +16,46 @@ public class FileHandler {
         }
     }
 
+    public static String fileAsString() {
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            Scanner in = new Scanner(new File(fileName));
+
+            while(in.hasNextLine()) {
+                String line = in.nextLine();
+                sb.append(line).append("--");
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No record found, add contacts");
+        }
+        return sb.toString();
+    }
+
+
+    public static void deleteUserFromFile(User user) {
+        String contentOfFile = fileAsString();
+        String userName = user.getUserName();
+
+        try {
+            PrintWriter ut = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+            String[] users = contentOfFile.split("--");
+
+            for(String line : users) {
+                if(line.contains(userName)) {
+                    continue; // Hoppar över den dvs delete från fil
+                }
+                ut.println(line);
+            }
+
+            ut.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static void saveUpdatedUserEmailToFile(String oldEmail, String newEmail) {
         try {

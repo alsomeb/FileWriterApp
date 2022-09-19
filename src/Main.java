@@ -39,6 +39,8 @@ public class Main {
 
                 case "4" -> Users.updateUserMenu(scan);
 
+                case "5" -> Users.delete(scan);
+
                 default -> System.out.println("Välj rätt");
 
             }
