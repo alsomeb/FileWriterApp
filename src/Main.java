@@ -14,7 +14,7 @@ public class Main {
         // Använd Scanner (lek 5 sida 22 i PP) - KLAR
 
         // KOLLA SÅ INTE DUBBLETTER PÅ NAMN (I USERS KLASSEN / INPUT VALIDATOR ) - KLAR
-
+        // DELETE!! - KLAR
 
         FileHandler.loadUsers(); // Laddar ner Users från contacts.txt // Skall va utanför loop så den inte laddar om och blir dubletter
         Scanner scan = new Scanner(System.in);
